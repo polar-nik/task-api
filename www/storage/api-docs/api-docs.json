@@ -1,0 +1,1422 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "API documentation",
+        "version": "0.1"
+    },
+    "paths": {
+        "/auth/sign-up": {
+            "post": {
+                "tags": [
+                    "Auth"
+                ],
+                "summary": "Sign up",
+                "operationId": "8060ba7cb59324131da8151d9518ca60",
+                "requestBody": {
+                    "description": "User credentials",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "name",
+                                    "email",
+                                    "password"
+                                ],
+                                "properties": {
+                                    "name": {
+                                        "type": "string",
+                                        "example": "Ivan"
+                                    },
+                                    "email": {
+                                        "type": "string",
+                                        "format": "email",
+                                        "example": "user1@email.com"
+                                    },
+                                    "password": {
+                                        "type": "string",
+                                        "format": "password",
+                                        "example": "notless6"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "success": {
+                                            "type": "boolean",
+                                            "example": "true"
+                                        },
+                                        "token": {
+                                            "type": "string",
+                                            "example": "2|ua3LsYWaAfLqBCIZ3ULdwUGhzqA3PA25egKEJQ0N6c261c8e"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Unprocessable Content",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "success": {
+                                            "type": "boolean",
+                                            "example": "false"
+                                        },
+                                        "message": {
+                                            "type": "string",
+                                            "example": "The email field must be a valid email address."
+                                        },
+                                        "errors": {
+                                            "properties": {
+                                                "email": {
+                                                    "type": "array",
+                                                    "items": {
+                                                        "type": "string",
+                                                        "example": "The email field is required."
+                                                    },
+                                                    "collectionFormat": "multi"
+                                                }
+                                            },
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/auth/sign-in": {
+            "post": {
+                "tags": [
+                    "Auth"
+                ],
+                "summary": "Sign in",
+                "operationId": "88696b680d5e73bbbbfbc88b2ec80491",
+                "requestBody": {
+                    "description": "User credentials",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "name",
+                                    "email",
+                                    "password"
+                                ],
+                                "properties": {
+                                    "email": {
+                                        "type": "string",
+                                        "format": "email",
+                                        "example": "user1@email.com"
+                                    },
+                                    "password": {
+                                        "type": "string",
+                                        "format": "password",
+                                        "example": "notless6"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "success": {
+                                            "type": "boolean",
+                                            "example": "true"
+                                        },
+                                        "token": {
+                                            "type": "string",
+                                            "example": "2|ua3LsYWaAfLqBCIZ3ULdwUGhzqA3PA25egKEJQ0N6c261c8e"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Unprocessable Content",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "success": {
+                                            "type": "boolean",
+                                            "example": "false"
+                                        },
+                                        "message": {
+                                            "type": "string",
+                                            "example": "The email field must be a valid email address."
+                                        },
+                                        "errors": {
+                                            "properties": {
+                                                "email": {
+                                                    "type": "array",
+                                                    "items": {
+                                                        "type": "string",
+                                                        "example": "The email field is required."
+                                                    },
+                                                    "collectionFormat": "multi"
+                                                }
+                                            },
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/auth/sign-out": {
+            "post": {
+                "tags": [
+                    "Auth"
+                ],
+                "summary": "Sign out",
+                "operationId": "88c3def53b4e7ece66072d49d5302956",
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "success": {
+                                            "type": "boolean",
+                                            "example": "true"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "403": {
+                        "description": "Forbidden - when token not persists",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "success": {
+                                            "type": "boolean",
+                                            "example": "false"
+                                        },
+                                        "message": {
+                                            "type": "string",
+                                            "example": "This action is unauthorized."
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/api/task": {
+            "get": {
+                "tags": [
+                    "Task"
+                ],
+                "summary": "Tasks list",
+                "operationId": "d107757999f8b879d7413bd47c5172bf",
+                "parameters": [
+                    {
+                        "name": "status_id",
+                        "in": "query",
+                        "example": "1"
+                    },
+                    {
+                        "name": "due_date",
+                        "in": "query",
+                        "example": "20:20 10/10/2025"
+                    },
+                    {
+                        "name": "page",
+                        "in": "query",
+                        "example": "1"
+                    },
+                    {
+                        "name": "per_page",
+                        "in": "query",
+                        "example": "30"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "success": {
+                                            "type": "boolean",
+                                            "example": "true"
+                                        },
+                                        "current_page": {
+                                            "type": "integer",
+                                            "example": "1"
+                                        },
+                                        "data": {
+                                            "type": "array",
+                                            "items": {
+                                                "properties": {
+                                                    "id": {
+                                                        "type": "integer",
+                                                        "example": "1"
+                                                    },
+                                                    "title": {
+                                                        "type": "string",
+                                                        "example": "Task title"
+                                                    },
+                                                    "description": {
+                                                        "type": "string",
+                                                        "example": "Some task description"
+                                                    },
+                                                    "status_id": {
+                                                        "type": "integer",
+                                                        "example": "1"
+                                                    },
+                                                    "user_id": {
+                                                        "type": "integer",
+                                                        "example": "1"
+                                                    },
+                                                    "assigned_to_user_id": {
+                                                        "type": "integer",
+                                                        "example": "1"
+                                                    },
+                                                    "due_date": {
+                                                        "type": "string",
+                                                        "format": "datetime",
+                                                        "example": "2024-10-10T20:20:00.000000Z"
+                                                    },
+                                                    "created_at": {
+                                                        "type": "string",
+                                                        "format": "datetime",
+                                                        "example": "2024-10-10T20:20:00.000000Z"
+                                                    },
+                                                    "updated_at": {
+                                                        "type": "string",
+                                                        "format": "datetime",
+                                                        "example": "2024-10-10T20:20:00.000000Z"
+                                                    },
+                                                    "deleted_at": {
+                                                        "type": "string",
+                                                        "format": "datetime",
+                                                        "example": "null"
+                                                    }
+                                                },
+                                                "type": "object"
+                                            }
+                                        },
+                                        "first_page_url": {
+                                            "type": "string",
+                                            "example": "http://localhost:8080/api/task?page=1"
+                                        },
+                                        "from": {
+                                            "type": "integer",
+                                            "example": "1"
+                                        },
+                                        "last_page": {
+                                            "type": "integer",
+                                            "example": "2"
+                                        },
+                                        "last_page_url": {
+                                            "type": "string",
+                                            "example": "http://localhost:8080/api/task?page=2"
+                                        },
+                                        "links": {
+                                            "type": "array",
+                                            "items": {
+                                                "properties": {
+                                                    "url": {
+                                                        "type": "string",
+                                                        "example": "http://localhost:8080/api/task?page=2"
+                                                    },
+                                                    "label": {
+                                                        "type": "string",
+                                                        "example": "2"
+                                                    },
+                                                    "active": {
+                                                        "type": "boolean",
+                                                        "example": "false"
+                                                    }
+                                                },
+                                                "type": "object"
+                                            }
+                                        },
+                                        "next_page_url": {
+                                            "type": "string",
+                                            "example": "http://localhost:8080/api/task?page=2"
+                                        },
+                                        "path": {
+                                            "type": "string",
+                                            "example": "http://localhost:8080/api/task"
+                                        },
+                                        "per_page": {
+                                            "type": "integer",
+                                            "example": "30"
+                                        },
+                                        "prev_page_url": {
+                                            "type": "string",
+                                            "example": "null"
+                                        },
+                                        "to": {
+                                            "type": "integer",
+                                            "example": "2"
+                                        },
+                                        "total": {
+                                            "type": "integer",
+                                            "example": "2"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Unprocessable Content",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "success": {
+                                            "type": "boolean",
+                                            "example": "false"
+                                        },
+                                        "message": {
+                                            "type": "string",
+                                            "example": "The due date field must match the format H:i d/m/Y."
+                                        },
+                                        "errors": {
+                                            "properties": {
+                                                "due_date": {
+                                                    "type": "array",
+                                                    "items": {
+                                                        "type": "string",
+                                                        "example": "The due date field must match the format H:i d/m/Y."
+                                                    },
+                                                    "collectionFormat": "multi"
+                                                }
+                                            },
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/task/store": {
+            "post": {
+                "tags": [
+                    "Task"
+                ],
+                "summary": "Create task",
+                "operationId": "00c33b3ed3efe7351e656d0e45aecb58",
+                "requestBody": {
+                    "description": "Task data",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "title",
+                                    "assigned_to_user_id",
+                                    "due_date"
+                                ],
+                                "properties": {
+                                    "title": {
+                                        "type": "string",
+                                        "example": "Task title"
+                                    },
+                                    "description": {
+                                        "type": "string",
+                                        "example": "Some task description"
+                                    },
+                                    "assigned_to_user_id": {
+                                        "type": "integer",
+                                        "example": "1"
+                                    },
+                                    "due_date": {
+                                        "type": "string",
+                                        "format": "datetime",
+                                        "example": "20:20 10/10/2025"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "success": {
+                                            "type": "boolean",
+                                            "example": "true"
+                                        },
+                                        "task": {
+                                            "properties": {
+                                                "id": {
+                                                    "type": "integer",
+                                                    "example": "1"
+                                                },
+                                                "title": {
+                                                    "type": "string",
+                                                    "example": "Task title"
+                                                },
+                                                "description": {
+                                                    "type": "string",
+                                                    "example": "Some task description"
+                                                },
+                                                "status_id": {
+                                                    "type": "integer",
+                                                    "example": "1"
+                                                },
+                                                "user_id": {
+                                                    "type": "integer",
+                                                    "example": "1"
+                                                },
+                                                "assigned_to_user_id": {
+                                                    "type": "integer",
+                                                    "example": "1"
+                                                },
+                                                "due_date": {
+                                                    "type": "string",
+                                                    "format": "datetime",
+                                                    "example": "2024-10-10T20:20:00.000000Z"
+                                                },
+                                                "created_at": {
+                                                    "type": "string",
+                                                    "format": "datetime",
+                                                    "example": "2024-10-10T20:20:00.000000Z"
+                                                },
+                                                "updated_at": {
+                                                    "type": "string",
+                                                    "format": "datetime",
+                                                    "example": "2024-10-10T20:20:00.000000Z"
+                                                },
+                                                "deleted_at": {
+                                                    "type": "string",
+                                                    "format": "datetime",
+                                                    "example": "null"
+                                                }
+                                            },
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "success": {
+                                            "type": "boolean",
+                                            "example": "false"
+                                        },
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Unauthenticated."
+                                        },
+                                        "errors": {
+                                            "properties": {
+                                                "auth": {
+                                                    "type": "string",
+                                                    "example": "Unauthenticated"
+                                                }
+                                            },
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Unprocessable Content",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "success": {
+                                            "type": "boolean",
+                                            "example": "false"
+                                        },
+                                        "message": {
+                                            "type": "string",
+                                            "example": "The assigned to user id field is required."
+                                        },
+                                        "errors": {
+                                            "properties": {
+                                                "assigned_to_user_id": {
+                                                    "type": "array",
+                                                    "items": {
+                                                        "type": "string",
+                                                        "example": "The assigned to user id field is required"
+                                                    },
+                                                    "collectionFormat": "multi"
+                                                }
+                                            },
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/api/task/{id}": {
+            "get": {
+                "tags": [
+                    "Task"
+                ],
+                "summary": "Task data",
+                "operationId": "25a5d2d5458c4528f39593c36ab930e9",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "example": "1"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "success": {
+                                            "type": "boolean",
+                                            "example": "true"
+                                        },
+                                        "id": {
+                                            "type": "integer",
+                                            "example": "1"
+                                        },
+                                        "title": {
+                                            "type": "string",
+                                            "example": "Task title"
+                                        },
+                                        "description": {
+                                            "type": "string",
+                                            "example": "Some task description"
+                                        },
+                                        "status_id": {
+                                            "type": "integer",
+                                            "example": "1"
+                                        },
+                                        "user_id": {
+                                            "type": "integer",
+                                            "example": "1"
+                                        },
+                                        "assigned_to_user_id": {
+                                            "type": "integer",
+                                            "example": "1"
+                                        },
+                                        "due_date": {
+                                            "type": "string",
+                                            "format": "datetime",
+                                            "example": "2024-10-10T20:20:00.000000Z"
+                                        },
+                                        "created_at": {
+                                            "type": "string",
+                                            "format": "datetime",
+                                            "example": "2024-10-10T20:20:00.000000Z"
+                                        },
+                                        "updated_at": {
+                                            "type": "string",
+                                            "format": "datetime",
+                                            "example": "2024-10-10T20:20:00.000000Z"
+                                        },
+                                        "deleted_at": {
+                                            "type": "string",
+                                            "format": "datetime",
+                                            "example": "null"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Not found",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "success": {
+                                            "type": "boolean",
+                                            "example": "false"
+                                        },
+                                        "message": {
+                                            "type": "string",
+                                            "example": "No query results for model [App\\\\Models\\\\Task] 13"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "Task"
+                ],
+                "summary": "Put Task in trash",
+                "operationId": "4d80dbde8656bbc56d455d5c260b2f6c",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "example": "1"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "success": {
+                                            "type": "boolean",
+                                            "example": "true"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "403": {
+                        "description": "Forbidden",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "success": {
+                                            "type": "boolean",
+                                            "example": "false"
+                                        },
+                                        "message": {
+                                            "type": "string",
+                                            "example": "This action is unauthorized."
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Not found",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "success": {
+                                            "type": "boolean",
+                                            "example": "false"
+                                        },
+                                        "message": {
+                                            "type": "string",
+                                            "example": "No query results for model [App\\\\Models\\\\Task] 13"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ]
+            },
+            "patch": {
+                "tags": [
+                    "Task"
+                ],
+                "summary": "Update task data",
+                "operationId": "a4e0f6def570bb2841be2332939cd085",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "example": "1"
+                    }
+                ],
+                "requestBody": {
+                    "description": "Task data",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "title": {
+                                        "type": "string",
+                                        "example": "Task title"
+                                    },
+                                    "description": {
+                                        "type": "string",
+                                        "example": "Some task description"
+                                    },
+                                    "assigned_to_user_id": {
+                                        "type": "integer",
+                                        "example": "1"
+                                    },
+                                    "due_date": {
+                                        "type": "string",
+                                        "format": "datetime",
+                                        "example": "20:20 10/10/2025"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "success": {
+                                            "type": "boolean",
+                                            "example": "true"
+                                        },
+                                        "id": {
+                                            "type": "integer",
+                                            "example": "1"
+                                        },
+                                        "title": {
+                                            "type": "string",
+                                            "example": "Task title"
+                                        },
+                                        "description": {
+                                            "type": "string",
+                                            "example": "Some task description"
+                                        },
+                                        "status_id": {
+                                            "type": "integer",
+                                            "example": "1"
+                                        },
+                                        "user_id": {
+                                            "type": "integer",
+                                            "example": "1"
+                                        },
+                                        "assigned_to_user_id": {
+                                            "type": "integer",
+                                            "example": "1"
+                                        },
+                                        "due_date": {
+                                            "type": "string",
+                                            "format": "datetime",
+                                            "example": "2024-10-10T20:20:00.000000Z"
+                                        },
+                                        "created_at": {
+                                            "type": "string",
+                                            "format": "datetime",
+                                            "example": "2024-10-10T20:20:00.000000Z"
+                                        },
+                                        "updated_at": {
+                                            "type": "string",
+                                            "format": "datetime",
+                                            "example": "2024-10-10T20:20:00.000000Z"
+                                        },
+                                        "deleted_at": {
+                                            "type": "string",
+                                            "format": "datetime",
+                                            "example": "null"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "403": {
+                        "description": "Forbidden",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "success": {
+                                            "type": "boolean",
+                                            "example": "false"
+                                        },
+                                        "message": {
+                                            "type": "string",
+                                            "example": "This action is unauthorized."
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Not found",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "success": {
+                                            "type": "boolean",
+                                            "example": "false"
+                                        },
+                                        "message": {
+                                            "type": "string",
+                                            "example": "No query results for model [App\\\\Models\\\\Task] 13"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Unprocessable Content",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "success": {
+                                            "type": "boolean",
+                                            "example": "false"
+                                        },
+                                        "message": {
+                                            "type": "string",
+                                            "example": "The selected status id is invalid"
+                                        },
+                                        "errors": {
+                                            "properties": {
+                                                "status_id": {
+                                                    "type": "array",
+                                                    "items": {
+                                                        "type": "string",
+                                                        "example": "The selected status id is invalid"
+                                                    },
+                                                    "collectionFormat": "multi"
+                                                }
+                                            },
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/api/task/{id}/status": {
+            "patch": {
+                "tags": [
+                    "Task"
+                ],
+                "summary": "Update task status",
+                "operationId": "87c9eb500c00bc8b190c191ed989827c",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "example": "1"
+                    }
+                ],
+                "requestBody": {
+                    "description": "Task data",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "title",
+                                    "assigned_to_user_id",
+                                    "due_date"
+                                ],
+                                "properties": {
+                                    "status_id": {
+                                        "type": "integer",
+                                        "example": "1"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "success": {
+                                            "type": "boolean",
+                                            "example": "true"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "403": {
+                        "description": "Forbidden",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "success": {
+                                            "type": "boolean",
+                                            "example": "false"
+                                        },
+                                        "message": {
+                                            "type": "string",
+                                            "example": "This action is unauthorized."
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Not found",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "success": {
+                                            "type": "boolean",
+                                            "example": "false"
+                                        },
+                                        "message": {
+                                            "type": "string",
+                                            "example": "No query results for model [App\\\\Models\\\\Task] 13"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Unprocessable Content",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "success": {
+                                            "type": "boolean",
+                                            "example": "false"
+                                        },
+                                        "message": {
+                                            "type": "string",
+                                            "example": "The selected status id is invalid"
+                                        },
+                                        "errors": {
+                                            "properties": {
+                                                "status_id": {
+                                                    "type": "array",
+                                                    "items": {
+                                                        "type": "string",
+                                                        "example": "The selected status id is invalid"
+                                                    },
+                                                    "collectionFormat": "multi"
+                                                }
+                                            },
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/api/task/search": {
+            "get": {
+                "tags": [
+                    "Task"
+                ],
+                "summary": "Search in title and discription",
+                "operationId": "c344c13e250229ba3efa196850aaa248",
+                "parameters": [
+                    {
+                        "name": "q",
+                        "in": "query",
+                        "example": "search"
+                    },
+                    {
+                        "name": "page",
+                        "in": "query",
+                        "example": "1"
+                    },
+                    {
+                        "name": "per_page",
+                        "in": "query",
+                        "example": "30"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "success": {
+                                            "type": "boolean",
+                                            "example": "true"
+                                        },
+                                        "current_page": {
+                                            "type": "integer",
+                                            "example": "1"
+                                        },
+                                        "data": {
+                                            "type": "array",
+                                            "items": {
+                                                "properties": {
+                                                    "id": {
+                                                        "type": "integer",
+                                                        "example": "1"
+                                                    },
+                                                    "title": {
+                                                        "type": "string",
+                                                        "example": "Task title"
+                                                    },
+                                                    "description": {
+                                                        "type": "string",
+                                                        "example": "Some task description"
+                                                    },
+                                                    "status_id": {
+                                                        "type": "integer",
+                                                        "example": "1"
+                                                    },
+                                                    "user_id": {
+                                                        "type": "integer",
+                                                        "example": "1"
+                                                    },
+                                                    "assigned_to_user_id": {
+                                                        "type": "integer",
+                                                        "example": "1"
+                                                    },
+                                                    "due_date": {
+                                                        "type": "string",
+                                                        "format": "datetime",
+                                                        "example": "2024-10-10T20:20:00.000000Z"
+                                                    },
+                                                    "created_at": {
+                                                        "type": "string",
+                                                        "format": "datetime",
+                                                        "example": "2024-10-10T20:20:00.000000Z"
+                                                    },
+                                                    "updated_at": {
+                                                        "type": "string",
+                                                        "format": "datetime",
+                                                        "example": "2024-10-10T20:20:00.000000Z"
+                                                    },
+                                                    "deleted_at": {
+                                                        "type": "string",
+                                                        "format": "datetime",
+                                                        "example": "null"
+                                                    }
+                                                },
+                                                "type": "object"
+                                            }
+                                        },
+                                        "first_page_url": {
+                                            "type": "string",
+                                            "example": "http://localhost:8080/api/task?page=1"
+                                        },
+                                        "from": {
+                                            "type": "integer",
+                                            "example": "1"
+                                        },
+                                        "last_page": {
+                                            "type": "integer",
+                                            "example": "2"
+                                        },
+                                        "last_page_url": {
+                                            "type": "string",
+                                            "example": "http://localhost:8080/api/task?page=2"
+                                        },
+                                        "links": {
+                                            "type": "array",
+                                            "items": {
+                                                "properties": {
+                                                    "url": {
+                                                        "type": "string",
+                                                        "example": "http://localhost:8080/api/task?page=2"
+                                                    },
+                                                    "label": {
+                                                        "type": "string",
+                                                        "example": "2"
+                                                    },
+                                                    "active": {
+                                                        "type": "boolean",
+                                                        "example": "false"
+                                                    }
+                                                },
+                                                "type": "object"
+                                            }
+                                        },
+                                        "next_page_url": {
+                                            "type": "string",
+                                            "example": "http://localhost:8080/api/task?page=2"
+                                        },
+                                        "path": {
+                                            "type": "string",
+                                            "example": "http://localhost:8080/api/task"
+                                        },
+                                        "per_page": {
+                                            "type": "integer",
+                                            "example": "30"
+                                        },
+                                        "prev_page_url": {
+                                            "type": "string",
+                                            "example": "null"
+                                        },
+                                        "to": {
+                                            "type": "integer",
+                                            "example": "2"
+                                        },
+                                        "total": {
+                                            "type": "integer",
+                                            "example": "2"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/task/{id}/revive": {
+            "post": {
+                "tags": [
+                    "Task"
+                ],
+                "summary": "Returns Task from trash",
+                "operationId": "2409734e956b21ad58f3d91eeb9f6083",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "example": "1"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "success": {
+                                            "type": "boolean",
+                                            "example": "true"
+                                        },
+                                        "id": {
+                                            "type": "integer",
+                                            "example": "1"
+                                        },
+                                        "title": {
+                                            "type": "string",
+                                            "example": "Task title"
+                                        },
+                                        "description": {
+                                            "type": "string",
+                                            "example": "Some task description"
+                                        },
+                                        "status_id": {
+                                            "type": "integer",
+                                            "example": "1"
+                                        },
+                                        "user_id": {
+                                            "type": "integer",
+                                            "example": "1"
+                                        },
+                                        "assigned_to_user_id": {
+                                            "type": "integer",
+                                            "example": "1"
+                                        },
+                                        "due_date": {
+                                            "type": "string",
+                                            "format": "datetime",
+                                            "example": "2024-10-10T20:20:00.000000Z"
+                                        },
+                                        "created_at": {
+                                            "type": "string",
+                                            "format": "datetime",
+                                            "example": "2024-10-10T20:20:00.000000Z"
+                                        },
+                                        "updated_at": {
+                                            "type": "string",
+                                            "format": "datetime",
+                                            "example": "2024-10-10T20:20:00.000000Z"
+                                        },
+                                        "deleted_at": {
+                                            "type": "string",
+                                            "format": "datetime",
+                                            "example": "null"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "403": {
+                        "description": "Forbidden",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "success": {
+                                            "type": "boolean",
+                                            "example": "false"
+                                        },
+                                        "message": {
+                                            "type": "string",
+                                            "example": "This action is unauthorized."
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Not found",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "success": {
+                                            "type": "boolean",
+                                            "example": "false"
+                                        },
+                                        "message": {
+                                            "type": "string",
+                                            "example": "No query results for model [App\\\\Models\\\\Task] 13"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ]
+            }
+        }
+    },
+    "components": {
+        "securitySchemes": {
+            "BearerAuth": {
+                "type": "http",
+                "name": "BearerAuth",
+                "in": "header",
+                "bearerFormat": "JWT",
+                "scheme": "bearer"
+            }
+        }
+    },
+    "tags": [
+        {
+            "name": "Auth",
+            "description": "Auth endpoints"
+        },
+        {
+            "name": "Task",
+            "description": "Task"
+        }
+    ]
+}

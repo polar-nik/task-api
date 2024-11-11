@@ -4,8 +4,11 @@ RESTful API для управления задачами
 
 # Установка
 
-```
+```console
 docker-compose up -d
+cd www/
+composer i
+php artisan key:generate
 ```
 
 По умолчанию используется 8080 порт
